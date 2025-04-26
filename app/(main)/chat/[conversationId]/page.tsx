@@ -26,7 +26,7 @@ async function page({ params }: { params: Props }) {
         <div className="w-full flex flex-col dark:bg-background rounded-r-2xl relative">
             <Header conversation={conversation} />
             <Body />
-            <Footer />
+            <Footer conversationId = {conversationId} />
         </div>
     )
 }

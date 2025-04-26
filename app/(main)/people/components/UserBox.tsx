@@ -48,10 +48,6 @@ function UserBox({ data: item }: Props) {
             })
     }
 
-    const handleMessage = () => {
-        console.log(item.id);
-
-    }
     return (
         <>
             <li className="w-96 flex items-center justify-between px-2 rounded-[5px] my-1 py-2 gap-1.5 hover:bg-gray-300 dark:hover:bg-white/20">

@@ -41,7 +41,7 @@ const Header = ({ conversation }: Props) => {
                 )}
             </div>
             <Drawer direction="right">
-                <DrawerTrigger>
+                <DrawerTrigger asChild>
                     <Button variant={"outline"} className="cursor-pointer"><RiMenu3Fill size={20} /></Button>
                 </DrawerTrigger>
                 <DrawerContent>
