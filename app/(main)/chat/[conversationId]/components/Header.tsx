@@ -47,7 +47,7 @@ const Header = ({ conversation }: Props) => {
                 <DrawerContent>
                     <DrawerHeader className="flex items-center flex-row justify-between">
                         <DrawerTitle>Chat details</DrawerTitle>
-                        <DrawerClose>
+                        <DrawerClose asChild>
                             <Button variant={"outline"} className="cursor-pointer"><MdClose /></Button>
                         </DrawerClose>
                     </DrawerHeader>
