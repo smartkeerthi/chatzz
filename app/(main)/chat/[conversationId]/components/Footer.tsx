@@ -27,7 +27,7 @@ const Footer = ({ conversationId }: { conversationId: string }) => {
         setLoading(true)
         const data = {
             message: message,
-            image: null,
+            image: [],
             conversationId: conversationId
         }
         await axios.post('/api/message', data)
@@ -48,7 +48,7 @@ const Footer = ({ conversationId }: { conversationId: string }) => {
                 <DialogTrigger asChild>
                     <Button variant={"outline"} className="cursor-pointer" disabled={loading} onClick={() => setModalOpen(true)}><BiImageAdd /></Button>
                 </DialogTrigger>
-                <DialogContent onInteractOutside={(e) => e.preventDefault()}>
+                <DialogContent onInteractOutside={(e) => e.preventDefault()} aria-describedby={undefined}>
                     <DialogHeader>
                         <DialogTitle>Upload Image</DialogTitle>
                     </DialogHeader>

@@ -62,7 +62,7 @@ const ChatBox = ({ data: item, selected }: Props) => {
                             )}
                         </div>
                         <div className="flex items-center justify-between w-64">
-                            <p className=" p-0 m-0 border-0 text-[0.8rem] truncate flex-3/4">{(lastMessage?.senderId !== otherUser.id && lastMessage) && 'You: '}{lastMessageTest}</p>
+                            <p className=" pb-1 m-0 border-0 text-[0.8rem] truncate flex-3/4">{(lastMessage?.senderId !== otherUser.id && lastMessage) && 'You: '}{lastMessageTest}</p>
                             <span className="">
                                 {seen ? (
                                     <IoCheckmarkDoneOutline color="var(--color-blue-500)" size={15} />
