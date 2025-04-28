@@ -8,6 +8,7 @@ import { Drawer, DrawerClose, DrawerContent, DrawerHeader, DrawerTitle, DrawerTr
 import { Conversation, User } from "@prisma/client"
 import { RiMenu3Fill } from "react-icons/ri";
 import { MdClose } from "react-icons/md";
+import { useMemo } from "react"
 
 type Props = {
     conversation: Conversation & {
@@ -19,6 +20,20 @@ const Header = ({ conversation }: Props) => {
 
     const otherUser = useOtherUser(conversation)
 
+    const isActive = true
+
+    const statusText = useMemo(() => {
+        if (conversation.isGroup) {
+            return `${conversation.users.length} members`;
+        }
+
+        if (isActive) {
+            return 'Online';
+        }
+
+        return 'Offline';
+    }, [conversation.isGroup, conversation.users.length, isActive]);
+
     return (
         <div className="py-2 px-3 flex  items-center justify-between drop-shadow-xs border-b-2">
             <div className="flex items-center gap-2">
@@ -27,7 +42,7 @@ const Header = ({ conversation }: Props) => {
                         <AvatarGroup users={conversation.users} />
                         <div className="flex flex-col justify-center">
                             <p className="leading-5">{conversation.name}</p>
-                            <span className="text-[0.6rem] text-blue-500 font-semibold tracking-wider">Online</span>
+                            <span className="text-[0.6rem] text-blue-500 font-semibold tracking-wider">{statusText}</span>
                         </div>
                     </>
                 ) : (

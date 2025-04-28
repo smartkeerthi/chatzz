@@ -1,5 +1,6 @@
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import { prisma } from "@/lib/db";
+import { pusherServer } from "@/lib/pusherServer";
 import { NextResponse } from "next/server";
 
 
@@ -60,6 +61,17 @@ export async function POST(request: Request) {
                     }
                 }
             }
+        })
+
+        await pusherServer.trigger(conversationId, 'message:new', newMessage)
+
+        const lastMessage = updateConversation.Message[updateConversation.Message.length - 1]
+
+        updateConversation.users.forEach(user => {
+            pusherServer.trigger(user.email, 'conversation:update', {
+                id: conversationId,
+                message: [lastMessage]
+            })
         })
 
         return NextResponse.json({ success: 'Message sent successfully' }, { status: 200 })
