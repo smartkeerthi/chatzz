@@ -45,20 +45,22 @@ const ChatBox = ({ data: item, selected }: Props) => {
     }, [lastMessage])
 
     const seen = useMemo(() => {
-        // if (!item.isGroup) {
-        //     if (lastMessage && lastMessage.seen.length == 2) return true
-        // }
-        // if (item.isGroup) {
-        //     if (lastMessage && item.userIds.length === lastMessage.seen.length) return true
-        // }
-        if (!lastMessage) return false
+        if (!item.isGroup) {
+            if (lastMessage && lastMessage.seen.length == 2) return true
+        }
+        if (item.isGroup) {
+            if (lastMessage && item.userIds.length === lastMessage.seen.length) return true
+        }
 
-        const seenArr = lastMessage.seen || []
+        // if (!lastMessage) return false
 
-        if (!otherUser.email) return false
+        // const seenArr = lastMessage.seen || []
 
-        return seenArr.filter(user => user.email === otherUser.email).length !== 0
-    }, [lastMessage])
+        // if (!otherUser.email) return false
+
+        // return seenArr.filter(user => user.email === otherUser.email).length !== 0
+        return false
+    }, [lastMessage, item])
 
 
     return (
