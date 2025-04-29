@@ -70,8 +70,6 @@ export async function POST(request: Request) {
 
         const lastMessage = updateConversation.Message[updateConversation.Message.length - 1]
 
-        console.log("last mes", lastMessage);
-
 
         updateConversation.users.forEach(user => {
             pusherServer.trigger(user.email, 'conversation:update', {

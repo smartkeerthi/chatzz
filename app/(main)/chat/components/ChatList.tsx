@@ -30,7 +30,7 @@ const ChatList = ({ initialItem }: Props) => {
     }, [session.data?.user?.email])
 
     useEffect(() => {
-        console.log(pusherKey);
+        // console.log(pusherKey);
 
         if (!pusherKey) return;
 
@@ -46,16 +46,16 @@ const ChatList = ({ initialItem }: Props) => {
         }
 
         const updateConversationHandler = (conversation: FullConversationType) => {
-            console.log("update con", conversation);
-            console.log(lists[0]);
+            // console.log("update con", conversation);
+            // console.log(lists[0]);
 
 
             setLists(current => current.map(currentConversation => {
                 if (currentConversation.id === conversation.id) {
-                    console.log({
-                        ...currentConversation,
-                        Message: [...currentConversation.Message, conversation.Message[0]]
-                    });
+                    // console.log({
+                    //     ...currentConversation,
+                    //     Message: [...currentConversation.Message, conversation.Message[0]]
+                    // });
 
                     return {
                         ...currentConversation,

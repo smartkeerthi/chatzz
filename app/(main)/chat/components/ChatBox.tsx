@@ -9,6 +9,7 @@ import moment from 'moment'
 import clsx from "clsx"
 import { IoCheckmarkOutline } from "react-icons/io5";
 import { IoCheckmarkDoneOutline } from "react-icons/io5";
+import { useSession } from "next-auth/react"
 
 type Props = {
     data: FullConversationType,
@@ -21,10 +22,15 @@ const ChatBox = ({ data: item, selected }: Props) => {
     const router = useRouter()
 
     const otherUser = useOtherUser(item)
+    const session = useSession()
 
     const handleClick = useCallback(() => {
         router.push(`/chat/${item.id}`);
     }, [item.id, router]);
+
+    const userEmail = useMemo(() => {
+        return session.data?.user?.email;
+    }, [session.data?.user?.email]);
 
     const lastMessage = useMemo(() => {
         const message = item.Message || []
@@ -39,14 +45,19 @@ const ChatBox = ({ data: item, selected }: Props) => {
     }, [lastMessage])
 
     const seen = useMemo(() => {
-        if (!item.isGroup) {
-            if (lastMessage && lastMessage.seen.length == 2) return true
-        }
-        if (item.isGroup) {
-            if (lastMessage && item.userIds.length === lastMessage.seen.length) return true
-        }
+        // if (!item.isGroup) {
+        //     if (lastMessage && lastMessage.seen.length == 2) return true
+        // }
+        // if (item.isGroup) {
+        //     if (lastMessage && item.userIds.length === lastMessage.seen.length) return true
+        // }
+        if (!lastMessage) return false
 
-        return false
+        const seenArr = lastMessage.seen || []
+
+        if (!otherUser.email) return false
+
+        return seenArr.filter(user => user.email === otherUser.email).length !== 0
     }, [lastMessage])
 
 
@@ -63,18 +74,21 @@ const ChatBox = ({ data: item, selected }: Props) => {
                             )}
                         </div>
                         <div className="flex items-center justify-between w-64">
-                            <p className=" pb-1 m-0 border-0 text-[0.8rem] truncate flex-3/4">{(lastMessage?.senderId !== otherUser.id && lastMessage) && 'You: '}{lastMessageTest}</p>
-                            <span className="">
-                                {seen ? (
-                                    <IoCheckmarkDoneOutline color="var(--color-blue-500)" size={15} />
-                                ) : (
-                                    <IoCheckmarkOutline color="var(--color-gray-500)" size={15} />
-                                )}
-                            </span>
+                            {/* {(lastMessage?.senderId !== otherUser.id && lastMessage) && 'You: '} */}
+                            <p className="pb-1 m-0 border-0 text-[0.8rem] truncate flex-3/4 order-2">{lastMessageTest}</p>
+                            {(lastMessage?.senderId !== otherUser.id && lastMessage) &&
+                                <span className="pr-1">
+                                    {(seen) ? (
+                                        <IoCheckmarkDoneOutline color="var(--color-blue-500)" size={15} />
+                                    ) : (
+                                        <IoCheckmarkOutline color="var(--color-gray-500)" size={15} />
+                                    )}
+                                </span>
+                            }
                         </div>
                     </div>
                     {/* {lastMessage?.createdAt && (
-                        <p className="text-[0.5rem] text-gray-500 font-medium pr-2">{moment(lastMessage.createdAt).fromNow()}</p>
+                        <p className="text-[0.6rem] text-gray-500 font-medium pr-2 w-24">{moment(lastMessage.createdAt).format('LT')}</p>
                     )} */}
                 </div>
             </li>
