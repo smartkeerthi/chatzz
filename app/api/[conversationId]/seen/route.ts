@@ -23,6 +23,9 @@ export async function POST(request: Request, { params }: { params: { conversatio
                 Message: {
                     include: {
                         seen: true,
+                    },
+                    orderBy: {
+                        createdAt: 'asc'
                     }
                 },
                 users: true
@@ -48,8 +51,7 @@ export async function POST(request: Request, { params }: { params: { conversatio
                     connect: {
                         id: currentUser.id
                     }
-                },
-                seenId: [...seenMem, currentUser.id]
+                }
             },
             include: {
                 seen: true,
@@ -57,14 +59,23 @@ export async function POST(request: Request, { params }: { params: { conversatio
             }
         })
 
+        // console.log("updated mess", updateMessage);
+
+
         await pusherServer.trigger(currentUser.email, 'conversation:update', {
             id: conversationId,
-            messages: [updateMessage]
+            Message: [updateMessage]
         })
 
-        if (lastMessage.seenId.indexOf(currentUser.id) !== -1) {
+        // console.log(lastMessage.seen);
+        // console.log(lastMessage.seen.indexOf(currentUser));
+
+
+        if (lastMessage.seen.indexOf(currentUser) !== -1) {
             return NextResponse.json(conversation);
         }
+
+        // if(lastMessage.seen.indexOf(currentUser))
 
         await pusherServer.trigger(conversationId, 'message:update', updateMessage)
 

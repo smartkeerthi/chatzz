@@ -17,6 +17,7 @@ type Props = {
 
 
 const ChatBox = ({ data: item, selected }: Props) => {
+
     const router = useRouter()
 
     const otherUser = useOtherUser(item)
@@ -35,14 +36,14 @@ const ChatBox = ({ data: item, selected }: Props) => {
         if (lastMessage?.image.length >= 1) return 'Sent an Image'
         if (lastMessage?.body) return lastMessage.body
         return 'Started a new conversation'
-    }, [])
+    }, [lastMessage])
 
     const seen = useMemo(() => {
         if (!item.isGroup) {
-            if (lastMessage && lastMessage.seenId.length == 2) return true
+            if (lastMessage && lastMessage.seen.length == 2) return true
         }
         if (item.isGroup) {
-            if (lastMessage && item.userIds.length === lastMessage.seenId.length) return true
+            if (lastMessage && item.userIds.length === lastMessage.seen.length) return true
         }
 
         return false

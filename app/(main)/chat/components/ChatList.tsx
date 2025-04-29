@@ -47,17 +47,19 @@ const ChatList = ({ initialItem }: Props) => {
 
         const updateConversationHandler = (conversation: FullConversationType) => {
             console.log("update con", conversation);
+            console.log(lists[0]);
+
 
             setLists(current => current.map(currentConversation => {
                 if (currentConversation.id === conversation.id) {
                     console.log({
                         ...currentConversation,
-                        Message: conversation.Message
+                        Message: [...currentConversation.Message, conversation.Message[0]]
                     });
 
                     return {
                         ...currentConversation,
-                        Message: conversation.Message
+                        Message: [...currentConversation.Message, conversation.Message[0]]
                     }
                 }
 

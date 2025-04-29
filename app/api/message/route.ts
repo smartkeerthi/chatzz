@@ -32,8 +32,7 @@ export async function POST(request: Request) {
                     connect: {
                         id: conversationId
                     }
-                },
-                seenId: [currentUser.id]
+                }
             },
             include: {
                 seen: true,
@@ -58,19 +57,26 @@ export async function POST(request: Request) {
                 Message: {
                     include: {
                         seen: true
+                    },
+                    orderBy: {
+                        createdAt: 'asc'
                     }
                 }
             }
         })
 
+
         await pusherServer.trigger(conversationId, 'message:new', newMessage)
 
         const lastMessage = updateConversation.Message[updateConversation.Message.length - 1]
 
+        console.log("last mes", lastMessage);
+
+
         updateConversation.users.forEach(user => {
             pusherServer.trigger(user.email, 'conversation:update', {
                 id: conversationId,
-                message: [lastMessage]
+                Message: [lastMessage]
             })
         })
 
