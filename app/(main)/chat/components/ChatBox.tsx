@@ -4,7 +4,7 @@ import useOtherUser from "@/app/hooks/useOtherUser"
 import { FullConversationType } from "@/app/types"
 import Avatar from "@/components/Avatar"
 import { useRouter } from "next/navigation"
-import { useCallback, useMemo } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 import moment from 'moment'
 import clsx from "clsx"
 import { IoCheckmarkOutline } from "react-icons/io5";
@@ -19,6 +19,8 @@ type Props = {
 
 const ChatBox = ({ data: item, selected }: Props) => {
 
+    const [seen, setSeen] = useState<boolean>()
+
     const router = useRouter()
 
     const otherUser = useOtherUser(item)
@@ -27,10 +29,6 @@ const ChatBox = ({ data: item, selected }: Props) => {
     const handleClick = useCallback(() => {
         router.push(`/chat/${item.id}`);
     }, [item.id, router]);
-
-    const userEmail = useMemo(() => {
-        return session.data?.user?.email;
-    }, [session.data?.user?.email]);
 
     const lastMessage = useMemo(() => {
         const message = item.Message || []
@@ -44,7 +42,7 @@ const ChatBox = ({ data: item, selected }: Props) => {
         return 'Started a new conversation'
     }, [lastMessage])
 
-    const seen = useMemo(() => {
+    const isSeen = () => {
         if (!item.isGroup) {
             if (lastMessage && lastMessage.seen.length == 2) return true
         }
@@ -60,7 +58,14 @@ const ChatBox = ({ data: item, selected }: Props) => {
 
         // return seenArr.filter(user => user.email === otherUser.email).length !== 0
         return false
-    }, [lastMessage, item])
+    }
+
+    useEffect(() => {
+        const seen = isSeen()
+        setSeen(seen)
+        console.log(seen);
+
+    }, [lastMessage])
 
 
     return (

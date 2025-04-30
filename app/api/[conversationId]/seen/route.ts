@@ -40,7 +40,7 @@ export async function POST(request: Request, { params }: { params: { conversatio
             return NextResponse.json(conversation, { status: 200 });
         }
 
-        const seenMem = lastMessage.seenId
+        // const seenMem = lastMessage.seenId
 
         const updateMessage = await prisma.message.update({
             where: {
