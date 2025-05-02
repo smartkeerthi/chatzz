@@ -53,8 +53,8 @@ export function ToggleTheme() {
         //         </DropdownMenuItem>
         //     </DropdownMenuContent>
         // </DropdownMenu>
-        <div>
-            <Button onClick={handleToggleThemes} className="bg-transparent shadow-none border-0 outline-0 cursor-pointer text-black hover:bg-transparent p-1 dark:text-white dark:px-5" >
+        <div className="w-full h-12 flex items-center justify-center">
+            <Button onClick={handleToggleThemes} className="shadow-none border-0 outline-0 cursor-pointer text-black hover:bg-violet-400/90 p-1 dark:text-white rounded-[10px] w-9 h-9 bg-violet-400/50" >
                 {isDark ? (
                     <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
                 ) : (
