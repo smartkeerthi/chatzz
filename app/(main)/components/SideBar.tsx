@@ -29,7 +29,7 @@ function SideBar() {
                         ))}
                     </ul>
                     <div className="w-full pb-3">
-                    <Separator className="my-1 bg-zinc-100/40" />   
+                        <Separator className="my-1 bg-zinc-100/40" />
                         <ToggleTheme />
                     </div>
                 </div>

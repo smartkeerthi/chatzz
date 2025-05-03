@@ -4,7 +4,7 @@ import useOtherUser from "@/app/hooks/useOtherUser"
 import { FullConversationType } from "@/app/types"
 import Avatar from "@/components/Avatar"
 import { useRouter } from "next/navigation"
-import { useCallback, useEffect, useMemo, useState } from "react"
+import { Suspense, useCallback, useEffect, useMemo, useState } from "react"
 import moment from 'moment'
 import clsx from "clsx"
 import { IoCheckmarkOutline } from "react-icons/io5";
@@ -49,14 +49,6 @@ const ChatBox = ({ data: item, selected }: Props) => {
         if (item.isGroup) {
             if (lastMessage && item.userIds.length === lastMessage.seen.length) return true
         }
-
-        // if (!lastMessage) return false
-
-        // const seenArr = lastMessage.seen || []
-
-        // if (!otherUser.email) return false
-
-        // return seenArr.filter(user => user.email === otherUser.email).length !== 0
         return false
     }
 
@@ -66,6 +58,8 @@ const ChatBox = ({ data: item, selected }: Props) => {
         console.log(seen);
 
     }, [lastMessage])
+
+
 
 
     return (
