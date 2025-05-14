@@ -35,7 +35,7 @@ function MessageBox({ isLast, data }: MessageProps) {
             </Avatar>
             <ViewImageModal imgOpen={imgOpen} closeImg={() => setImgOpen(false)} images={data.image} />
             <div>
-                <div className={clsx("px-2 py-1 rounded-[0.4rem] text-sm transition-all duration-300", isOwn ? ('bg-violet-500/50') : ('bg-gray-500/50'), data.image.length > 0 && 'cursor-pointer hover:contrast-150')}>
+                <div className={clsx("px-2 py-1 rounded-[0.4rem] text-sm transition-all duration-300 max-w-96", isOwn ? ('bg-violet-500/50') : ('bg-gray-500/50'), data.image.length > 0 && 'cursor-pointer hover:contrast-150')}>
                     {data.image.length > 0 ? (
                         <div className="grid grid-cols-2 gap-1 auto-rows-auto" onClick={() => setImgOpen(true)}>
                             {data.image.slice(0, viewImageCount).map((img, i) => (
