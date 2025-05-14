@@ -52,10 +52,23 @@ const ChatBox = ({ data: item, selected }: Props) => {
         return false
     }
 
+    const time = useMemo(() => {
+        const createdAt = moment(lastMessage?.createdAt)
+        const diffDate = moment().diff(createdAt, 'days')
+        const isSame = moment().isSame(createdAt, 'day')
+
+        if (isSame) {
+            return createdAt.format('h:mm A')
+        } else if (diffDate === 1) {
+            return 'yesterday'
+        } else {
+            return createdAt.format('M/D')
+        }
+    }, [lastMessage, moment().format('h:mm')])
+
     useEffect(() => {
         const seen = isSeen()
         setSeen(seen)
-        console.log(seen);
 
     }, [lastMessage])
 
@@ -69,9 +82,9 @@ const ChatBox = ({ data: item, selected }: Props) => {
                     <Avatar image={otherUser.image as string} username={otherUser.username} />
                     <div className="flex flex-col leading-none gap-1 w-72">
                         <div className="flex items-center justify-between">
-                            <p className="font-bold p-0 m-0 border-0 text-[0.8rem] tracking-wide capitalize">{otherUser.username}</p>
+                            <p className="font-bold p-0 m-0 border-0 w-56 truncate text-[0.8rem] tracking-wide capitalize">{otherUser.username}</p>
                             {lastMessage?.createdAt && (
-                                <p className="text-[0.6rem] text-gray-500 font-medium pr-2">{moment(lastMessage.createdAt).fromNow()}</p>
+                                <p className="text-[0.6rem] text-gray-500 font-medium pr-2">{time}</p>
                             )}
                         </div>
                         <div className="flex items-center justify-between w-64">

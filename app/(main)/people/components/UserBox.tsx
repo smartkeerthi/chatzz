@@ -60,8 +60,8 @@ function UserBox({ data: item }: Props) {
                 <div className="flex gap-2 items-center w-full">
                     <Avatar image={item.image} username={item.username} />
                     <div className="flex flex-col leading-none w-64">
-                        <p className="font-bold p-0 m-0 border-0 uppercase text-[0.8rem] tracking-wide">{item.username}</p>
-                        <p className=" p-0 m-0 border-0 text-[0.8rem] ">{item.email}</p>
+                        <p className="font-bold p-0 m-0 border-0 uppercase text-[0.8rem] tracking-wide w-56 truncate">{item.username}</p>
+                        <p className=" p-0 m-0 border-0 text-[0.8rem] w-56 truncate">{item.email}</p>
                     </div>
                 </div>
                 {item.request == 'Requested' && <p className="text-[0.8rem] text-gray-500 font-medium pr-2">Requested</p>}

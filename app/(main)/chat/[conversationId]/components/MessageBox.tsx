@@ -6,7 +6,7 @@ import clsx from "clsx"
 import { useSession } from "next-auth/react"
 import Image from "next/image"
 import ViewImageModal from "./ViewImageModal"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import moment from 'moment'
 
 type MessageProps = {
@@ -14,12 +14,29 @@ type MessageProps = {
     data: FullMessageType
 }
 
+type slidesType = {
+    src: string
+}
+
+
 function MessageBox({ isLast, data }: MessageProps) {
 
     const session = useSession()
     const isOwn = session.data?.user?.id === data.senderId
     const viewImageCount = 3
     const [imgOpen, setImgOpen] = useState<boolean>(false)
+    const [slides, setSlides] = useState<slidesType[]>([])
+
+    useEffect(() => {
+        if (data.image.length > 0) {
+            data.image.map((img) => {
+                const temp = { src: '' }
+                temp.src = img
+                setSlides(current => { return [...current, temp] })
+            })
+        }
+
+    }, [])
 
 
     return (
@@ -33,7 +50,7 @@ function MessageBox({ isLast, data }: MessageProps) {
                         .join("")}
                 </AvatarFallback>
             </Avatar>
-            <ViewImageModal imgOpen={imgOpen} closeImg={() => setImgOpen(false)} images={data.image} />
+            <ViewImageModal imgOpen={imgOpen} closeImg={() => setImgOpen(false)} images={slides} />
             <div>
                 <div className={clsx("px-2 py-1 rounded-[0.4rem] text-sm transition-all duration-300 max-w-96", isOwn ? ('bg-violet-500/50') : ('bg-gray-500/50'), data.image.length > 0 && 'cursor-pointer hover:contrast-150')}>
                     {data.image.length > 0 ? (
