@@ -19,23 +19,21 @@ const UserList = ({ items, userId }: props) => {
     const [list, setList] = useState(items)
     const [search, setSearch] = useState<string>('')
 
-    // useEffect(() => {
+    useEffect(() => {
 
+        const newRequestHandler = (data: { fromId: string }) => {
+            const updatedList = list.map((i) => i.id === data.fromId ? { ...i, request: 'Approve' } : i)
+            setList(updatedList)
+        }
 
-    //     const channel = pusherClient.subscribe(userId!)
+        const channel = pusherClient.subscribe(userId!)
+        channel.bind('request:new', newRequestHandler)
 
-    //     const newRequestHandler = (data: { fromId: string }) => {
-    //         const updatedList = list.map((i) => i.id === data.fromId ? { ...i, request: 'Approve' } : i)
-    //         setList(updatedList)
-    //     }
-
-    //     channel.bind('request:new', newRequestHandler)
-
-    //     return () => {
-    //         pusherClient.unsubscribe(userId!)
-    //         channel.unbind('request:new', newRequestHandler)
-    //     }
-    // }, [userId])
+        return () => {
+            pusherClient.unsubscribe(userId!)
+            channel.unbind('request:new', newRequestHandler)
+        }
+    }, [userId])
 
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

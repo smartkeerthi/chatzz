@@ -1,3 +1,3 @@
 export const homeRoute = ["/"]
-export const privateRoutes = ["/chat", "/userProfile"]
+export const privateRoutes = ["/chat", "/people"]
 export const authRoutes = ["/login", "/register"]

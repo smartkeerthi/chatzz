@@ -20,6 +20,7 @@ model User {
   password           String
   email              String    @unique
   image              String?
+  uploadedImage      String[]  @default([])
   isVerified         String    @db.Char(1)
   emailVerified      DateTime?
   isProfileCompleted String    @db.Char(1)
@@ -57,7 +58,7 @@ model Conversation {
 model Message {
   id             String       @id @default(uuid())
   body           String?
-  image          String?
+  image          String[]
   createdAt      DateTime     @default(now())
   seenId         String[]
   seen           User[]       @relation("seen")

@@ -61,7 +61,9 @@ export async function POST(request: Request) {
             }
         })
 
-        // implement pusher for accept and new converation
+        newConversation.users.forEach((user) => {
+            pusherServer.trigger(user.email, 'conversation:new', newConversation)
+        })
 
 
         return NextResponse.json({ success: "Request accepted" }, { status: 200 })
