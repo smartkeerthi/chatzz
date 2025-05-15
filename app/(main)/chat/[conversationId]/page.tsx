@@ -11,7 +11,7 @@ import getMessageById from "@/app/actions/getMessagesById"
 
 
 
-async function Page({ params }: { params: { conversationId: string } }) {
+async function Page({ params }: { params: Promise<{ conversationId: string }> }) {
 
     const { conversationId } = await params
 
