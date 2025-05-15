@@ -5,13 +5,13 @@ import Header from "./components/Header"
 import getMessageById from "@/app/actions/getMessagesById"
 
 
-type Props = {
-    conversationId: string
-}
+// type Props = {
+//     conversationId: string
+// }
 
 
 
-async function Page({ params }: { params: Props }) {
+async function Page({ params }: { params: { conversationId: string } }) {
 
     const { conversationId } = await params
 
