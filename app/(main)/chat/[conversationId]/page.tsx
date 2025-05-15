@@ -9,7 +9,11 @@ type Props = {
     conversationId: string
 }
 
-async function page({ params }: { params: Props }) {
+type PageProps = {
+    params: Props
+};
+
+async function page({ params }: PageProps) {
 
     const { conversationId } = await params
 
@@ -28,7 +32,7 @@ async function page({ params }: { params: Props }) {
         <div className="w-full flex flex-col dark:bg-background rounded-r-2xl relative">
             <Header conversation={conversation} />
             <Body initialItems={messages} />
-            <Footer conversationId = {conversationId} />
+            <Footer conversationId={conversationId} />
         </div>
     )
 }
