@@ -9,11 +9,9 @@ type Props = {
     conversationId: string
 }
 
-type PageProps = {
-    params: Props
-};
 
-async function page({ params }: PageProps) {
+
+async function Page({ params }: { params: Props }) {
 
     const { conversationId } = await params
 
@@ -37,4 +35,4 @@ async function page({ params }: PageProps) {
     )
 }
 
-export default page
+export default Page
