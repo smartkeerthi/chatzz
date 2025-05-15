@@ -26,12 +26,12 @@ const UserList = ({ items, userId }: props) => {
             setList(updatedList)
         }
 
-        const channel = pusherClient.subscribe(userId!)
-        channel.bind('request:new', newRequestHandler)
+        // const channel = pusherClient.subscribe(userId!)
+        // channel.bind('request:new', newRequestHandler)
 
         return () => {
-            pusherClient.unsubscribe(userId!)
-            channel.unbind('request:new', newRequestHandler)
+            // pusherClient.unsubscribe(userId!)
+            // channel.unbind('request:new', newRequestHandler)
         }
     }, [userId])
 

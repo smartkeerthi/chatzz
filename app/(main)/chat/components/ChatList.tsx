@@ -71,14 +71,14 @@ const ChatList = ({ initialItem }: Props) => {
             // setLists(sorted)
         }
 
-        const channel = pusherClient.subscribe(pusherKey)
-        channel.bind('conversation:new', newConversationHandler)
-        channel.bind('conversation:update', updateConversationHandler)
+        // const channel = pusherClient.subscribe(pusherKey)
+        // channel.bind('conversation:new', newConversationHandler)
+        // channel.bind('conversation:update', updateConversationHandler)
 
         return () => {
-            pusherClient.unsubscribe(pusherKey)
-            channel.unbind('conversation:new', newConversationHandler)
-            channel.unbind('conversation:update', updateConversationHandler)
+            // pusherClient.unsubscribe(pusherKey)
+            // channel.unbind('conversation:new', newConversationHandler)
+            // channel.unbind('conversation:update', updateConversationHandler)
         }
     }, [conversationId, pusherKey])
 
