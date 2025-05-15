@@ -8,10 +8,52 @@ export default function Loading() {
                 </div>
             </div>
         </div>
-        <div className="flex h-[85%] items-center justify-center text-gray-500 gap-1">
+        {/* <div className="flex h-[85%] items-center justify-center text-gray-500 gap-1">
             <span className="w-3 h-3 rounded-full bg-gray-400 animate-pulse" />
             <span className="w-3 h-3 rounded-full bg-gray-400 animate-pulse delay-300" />
             <span className="w-3 h-3 rounded-full bg-gray-400 animate-pulse delay-500" />
+        </div> */}
+        <div className="h-[85%] px-2 py-3">
+            <div className={'flex gap-1 mb-2 items-start px-2'}>
+                <span className="w-7 h-7 rounded-full bg-gray-400 animate-pulse" />
+                <div>
+                    <div className={"px-2 py-1  text-sm transition-all duration-300 max-w-96"}>
+                        <p className="w-20 h-10 bg-gray-400 animate-pulse rounded-[0.4rem] " />
+                    </div>
+                </div>
+            </div>
+            <div className={'flex gap-1 mb-2 items-start px-2 justify-end'}>
+                <span className="w-7 h-7 rounded-full bg-gray-400 animate-pulse order-2" />
+                <div>
+                    <div className={"px-2 py-1  text-sm transition-all duration-300 max-w-96"}>
+                        <p className="w-40 h-20 bg-gray-400 animate-pulse rounded-[0.4rem] " />
+                    </div>
+                </div>
+            </div>
+            <div className={'flex gap-1 mb-2 items-start px-2 justify-end'}>
+                <span className="w-7 h-7 rounded-full bg-gray-400 animate-pulse order-2" />
+                <div>
+                    <div className={"px-2 py-1  text-sm transition-all duration-300 max-w-96"}>
+                        <p className="w-12 h-10 bg-gray-400 animate-pulse rounded-[0.4rem] " />
+                    </div>
+                </div>
+            </div>
+            <div className={'flex gap-1 mb-2 items-start px-2 '}>
+                <span className="w-7 h-7 rounded-full bg-gray-400 animate-pulse" />
+                <div>
+                    <div className={"px-2 py-1  text-sm transition-all duration-300 max-w-96"}>
+                        <p className="w-32 h-10 bg-gray-400 animate-pulse rounded-[0.4rem] " />
+                    </div>
+                </div>
+            </div>
+            <div className={'flex gap-1 mb-2 items-start px-2 '}>
+                <span className="w-7 h-7 rounded-full bg-gray-400 animate-pulse" />
+                <div>
+                    <div className={"px-2 py-1  text-sm transition-all duration-300 max-w-96"}>
+                        <p className="w-20 h-10 bg-gray-400 animate-pulse rounded-[0.4rem] " />
+                    </div>
+                </div>
+            </div>
         </div>
     </div>)
 }

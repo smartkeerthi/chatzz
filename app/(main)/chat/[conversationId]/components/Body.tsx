@@ -9,6 +9,7 @@ import moment from "moment"
 import axios from "axios"
 import { pusherClient } from "@/lib/pusherClient"
 import { find } from "lodash"
+import Image from "next/image"
 
 
 type BodyProps = {
@@ -70,8 +71,10 @@ const Body = ({ initialItems }: BodyProps) => {
   return (
     <>
       {messages.length == 0 ? (
-        <div className="flex h-[85%] items-center justify-center text-gray-500">
-          <span>Start a conversation</span>
+        <div className="flex flex-col gap-1 h-[85%] items-center justify-center text-gray-600 dark:text-gray-300">
+          <Image src={'/NewChat.svg'} alt="new chat" width={200} height={200} className="mb-3" />
+          <span className="font-bold">You're starting a new conversation</span>
+          <span className="text-sm">Type your first message below</span>
         </div>
       ) : (
         <ScrollArea className="h-[85%] px-2 py-3">

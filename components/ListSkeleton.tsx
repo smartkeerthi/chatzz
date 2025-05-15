@@ -1,6 +1,9 @@
+
 import { Input } from "./ui/input"
 
 function ListSkeleton() {
+
+
     return (
         <div className="flex h-full w-full bg-[#f9f9f9] rounded-2xl">
             <div className="h-full border-r-2 border-gray dark:bg-background rounded-l-2xl dark:border-white/20 flex flex-col">

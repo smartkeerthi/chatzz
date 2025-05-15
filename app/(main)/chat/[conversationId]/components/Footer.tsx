@@ -25,28 +25,27 @@ const Footer = ({ conversationId }: { conversationId: string }) => {
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement> | any) => {
         e.preventDefault()
-        console.log(message);
 
-        // setLoading(true)
-        // const data = {
-        //     message: message,
-        //     image: [],
-        //     conversationId: conversationId
-        // }
-        // await axios.post('/api/message', data)
-        //     .then((res) => {
-        //         setLoading(false)
-        //         SetMessage('')
-        //     })
-        //     .catch(({ response }) => {
-        //         setLoading(false)
-        //         toast.error(response.data.error)
-        //     })
+        setLoading(true)
+        const data = {
+            message: message,
+            image: [],
+            conversationId: conversationId
+        }
+        await axios.post('/api/message', data)
+            .then((res) => {
+                setLoading(false)
+                SetMessage('')
+            })
+            .catch(({ response }) => {
+                setLoading(false)
+                toast.error(response.data.error)
+            })
     }
 
 
     return (
-        <div className="absolute w-full bottom-0 left-0 py-2 px-3 border-t-2 drop-shadow-xl flex gap-2 bg-[#f9f9f9]">
+        <div className="absolute w-full bottom-0 left-0 py-2 px-3 border-t-2 drop-shadow-xl flex gap-2 bg-[#f9f9f9] dark:bg-background">
             <Dialog modal open={modalOpen}>
                 <DialogTrigger asChild>
                     <Button variant={"outline"} className="cursor-pointer" disabled={loading} onClick={() => setModalOpen(true)}><BiImageAdd /></Button>

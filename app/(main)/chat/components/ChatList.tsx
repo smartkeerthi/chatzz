@@ -65,6 +65,10 @@ const ChatList = ({ initialItem }: Props) => {
 
                 return currentConversation
             }))
+
+            // const sorted = [...lists].sort((a, b) => new Date(b.lastMessageAt).getTime() - new Date(a.lastMessageAt).getTime())
+
+            // setLists(sorted)
         }
 
         // const channel = pusherClient.subscribe(pusherKey)
