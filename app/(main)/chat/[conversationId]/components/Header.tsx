@@ -9,6 +9,9 @@ import { Conversation, User } from "@prisma/client"
 import { RiMenu3Fill } from "react-icons/ri";
 import { MdClose } from "react-icons/md";
 import { useMemo } from "react"
+import { IoMdArrowBack } from "react-icons/io";
+import { useRouter } from "next/navigation"
+
 
 type Props = {
     conversation: Conversation & {
@@ -19,6 +22,8 @@ type Props = {
 const Header = ({ conversation }: Props) => {
 
     const otherUser = useOtherUser(conversation)
+
+    const router = useRouter()
 
     const isActive = true
 
@@ -37,6 +42,7 @@ const Header = ({ conversation }: Props) => {
     return (
         <div className="py-2 px-3 flex  items-center justify-between drop-shadow-xs border-b-2">
             <div className="flex items-center gap-2">
+                <IoMdArrowBack className="sm:hidden cursor-pointer" size={20} onClick={() => router.push(`/chat`)} />
                 {conversation.isGroup ? (
                     <>
                         <AvatarGroup users={conversation.users} />

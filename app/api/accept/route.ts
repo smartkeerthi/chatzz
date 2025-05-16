@@ -66,7 +66,7 @@ export async function POST(request: Request) {
         })
 
 
-        return NextResponse.json({ success: "Request accepted" }, { status: 200 })
+        return NextResponse.json({ success: "Request accepted", conversationId: newConversation.id }, { status: 200 })
 
     } catch (error) {
         console.log("accept error", error);
