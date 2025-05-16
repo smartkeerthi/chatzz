@@ -40,11 +40,11 @@ const getUsers = async () => {
             }
         })
 
-        let users: GetAllUsersProps[] = []
+        const users: GetAllUsersProps[] = []
 
 
         peoples.map(i => {
-            let user: GetAllUsersProps = {
+            const user: GetAllUsersProps = {
                 id: "",
                 username: "",
                 email: "",

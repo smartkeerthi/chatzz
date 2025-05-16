@@ -4,7 +4,7 @@ import { pusherServer } from "@/lib/pusherServer";
 import { NextResponse } from "next/server";
 
 
-export async function POST(request: Request, { params }: { params: { conversationId: string } }) {
+export async function POST(request: Request, { params }: { params: Promise<{ conversationId: string }> }) {
 
     try {
 

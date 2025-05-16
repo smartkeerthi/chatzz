@@ -5,11 +5,13 @@ import Header from "./components/Header"
 import getMessageById from "@/app/actions/getMessagesById"
 
 
-type Props = {
-    conversationId: string
-}
+// type Props = {
+//     conversationId: string
+// }
 
-async function page({ params }: { params: Props }) {
+
+
+async function Page({ params }: { params: Promise<{ conversationId: string }> }) {
 
     const { conversationId } = await params
 
@@ -28,9 +30,9 @@ async function page({ params }: { params: Props }) {
         <div className="w-full flex flex-col dark:bg-background rounded-r-2xl relative">
             <Header conversation={conversation} />
             <Body initialItems={messages} />
-            <Footer conversationId = {conversationId} />
+            <Footer conversationId={conversationId} />
         </div>
     )
 }
 
-export default page
+export default Page
