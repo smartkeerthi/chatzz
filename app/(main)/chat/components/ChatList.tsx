@@ -9,6 +9,7 @@ import useConversation from "@/app/hooks/useConversation"
 import { useSession } from "next-auth/react"
 import { pusherClient } from "@/lib/pusherClient"
 import { find } from 'lodash'
+import Logo from "@/components/logo"
 
 type Props = {
     initialItem: FullConversationType[]
@@ -83,9 +84,10 @@ const ChatList = ({ initialItem }: Props) => {
     }, [conversationId, pusherKey])
 
     return (
-        <div className="h-full border-r-2 border-gray dark:bg-background rounded-l-2xl dark:border-white/20 flex flex-col">
+        <div className="h-full border-r-2 border-gray dark:bg-background rounded-l-2xl max-md:rounded-none dark:border-white/20 flex flex-col max-sm:w-full">
             <div className="flex items-center justify-between px-3 py-3 border-b-2 border-gray  dark:border-white/20 dark:bg-background rounded-tl-2xl text-[#555] dark:text-white tracking-wide text-[1.2rem]">
-                <p className="font-bold">Chats</p>
+                <p className="font-bold max-md:hidden">Chats</p>
+                <Logo className="md:hidden py-0 mb-0!" />
             </div>
             <div className="p-2">
                 <Input value={search} onChange={handleChange} className="bg-white focus:outline-0 focus-visible:ring-0" placeholder="search..." />

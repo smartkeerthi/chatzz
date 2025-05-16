@@ -27,7 +27,7 @@ async function Page({ params }: { params: Promise<{ conversationId: string }> })
     }
 
     return (
-        <div className="w-full flex flex-col dark:bg-background rounded-r-2xl relative">
+        <div className="w-full flex flex-col dark:bg-background rounded-r-2xl relative max-sm:absolute max-sm:z-10 max-sm:inset-0 max-sm:bg-[#f9f9f9]">
             <Header conversation={conversation} />
             <Body initialItems={messages} />
             <Footer conversationId={conversationId} />

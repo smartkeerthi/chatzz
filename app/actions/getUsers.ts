@@ -19,6 +19,16 @@ const getUsers = async () => {
                 NOT: {
                     email: session.user.email
                 }
+            },
+            include: {
+                Conversation: {
+                    where: {
+                        userIds: {
+                            has: session.user.id
+                        },
+                        isGroup: null
+                    }
+                }
             }
         })
         const sendRequests = await prisma.followRequest.findMany({
@@ -42,7 +52,6 @@ const getUsers = async () => {
 
         const users: GetAllUsersProps[] = []
 
-
         peoples.map(i => {
             const user: GetAllUsersProps = {
                 id: "",
@@ -60,12 +69,14 @@ const getUsers = async () => {
             if (sent.length == 1 && received.length != 1) {
                 if (sent[0].isAccepted) {
                     user.request = 'Message'
+                    user.conversationId = i.Conversation[0].id
                 } else {
                     user.request = 'Requested'
                 }
             } else if (sent.length != 1 && received.length == 1) {
                 if (received[0].isAccepted) {
                     user.request = 'Message'
+                    user.conversationId = i.Conversation[0].id
                 } else {
                     user.request = 'Approve'
                 }

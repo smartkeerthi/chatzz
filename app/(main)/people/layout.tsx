@@ -11,7 +11,7 @@ export default async function PeopleLayout({ children }: Props) {
     const session = await getSession()
 
     return (
-        <div className="flex h-full w-full bg-[#f9f9f9] rounded-2xl">
+        <div className="flex h-full w-full bg-[#f9f9f9] rounded-2xl max-md:rounded-none">
             <UserList items={peoples} userId={session?.user?.id} />
             {children}
         </div>

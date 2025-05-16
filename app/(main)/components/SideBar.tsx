@@ -10,7 +10,7 @@ import { Separator } from "@/components/ui/separator"
 function SideBar() {
     const routes = useRoutes()
     return (
-        <div className=" drop-shadow-xl bg-violet-500 flex-none">
+        <div className="drop-shadow-xl bg-violet-500 flex-none max-md:hidden">
             <nav className="flex flex-col items-center px-1 h-full">
                 <div>
                     <Logo smallLogo={true} />

@@ -77,14 +77,14 @@ const ChatBox = ({ data: item, selected }: Props) => {
 
     return (
         <>
-            <li className={clsx(`w-96 flex items-center justify-between px-2 rounded-[5px] my-1 py-2 gap-1.5 hover:bg-gray-300 dark:hover:bg-white/20 cursor-pointer`, selected && "bg-violet-500/50 hover:bg-violet-500/50")} onClick={handleClick}>
+            <li className={clsx(`w-96 max-lg:w-80 max-sm:w-full flex items-center justify-between px-2 rounded-[5px] my-1 py-2 gap-1.5 hover:bg-gray-300 dark:hover:bg-white/20 cursor-pointer`, selected && "bg-violet-500/50 hover:bg-violet-500/50")} onClick={handleClick}>
                 <div className="flex gap-2 items-center w-full">
                     <Avatar image={otherUser.image as string} username={otherUser.username} />
-                    <div className="flex flex-col leading-none gap-1 w-72">
+                    <div className="flex flex-col leading-none gap-1 w-72 max-sm:w-full">
                         <div className="flex items-center justify-between">
-                            <p className="font-bold p-0 m-0 border-0 w-56 truncate text-[0.8rem] tracking-wide capitalize">{otherUser.username}</p>
+                            <p className="font-bold p-0 m-0 border-0 w-56  truncate text-[0.8rem] tracking-wide capitalize">{otherUser.username}</p>
                             {lastMessage?.createdAt && (
-                                <p className="text-[0.6rem] text-gray-500 font-medium pr-2">{time}</p>
+                                <p className="text-[0.6rem] text-gray-500 font-medium pr-2 max-lg:pr-0 max-lg:w-12">{time}</p>
                             )}
                         </div>
                         <div className="flex items-center justify-between w-64">

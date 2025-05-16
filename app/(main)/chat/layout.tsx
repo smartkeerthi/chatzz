@@ -11,7 +11,7 @@ export default async function ChatLayout({ children }: Props) {
     const conversations = await getConversations()
 
     return (
-        <div className="flex h-full w-full bg-[#f9f9f9] rounded-2xl">
+        <div className="flex h-full w-full bg-[#f9f9f9] rounded-2xl max-md:rounded-none">
             <ChatList initialItem={conversations} />
             {children}
         </div>
