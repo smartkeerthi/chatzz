@@ -13,6 +13,7 @@ import Logo from "@/components/logo"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 type Props = {
     initialItem: FullConversationType[]
@@ -32,6 +33,7 @@ const ChatList = ({ initialItem }: Props) => {
     const pusherKey = useMemo(() => {
         return session.data?.user?.email
     }, [session.data?.user?.email])
+
 
     useEffect(() => {
         // console.log(pusherKey);

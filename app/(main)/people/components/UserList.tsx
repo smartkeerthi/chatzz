@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
 import { GetAllUsersProps } from "@/app/types";
 import { pusherClient } from "@/lib/pusherClient";
+import Logo from "@/components/logo";
 
 
 type props = {
@@ -43,7 +44,8 @@ const UserList = ({ items, userId }: props) => {
     return (
         <div className="h-full border-r-2 border-gray dark:bg-background rounded-l-2xl max-md:rounded-none dark:border-white/20 flex flex-col max-sm:w-full">
             <div className="flex items-center justify-between px-3 py-3 border-b-2 border-gray  dark:border-white/20 dark:bg-background rounded-tl-2xl text-[#555] dark:text-white tracking-wide text-[1.2rem]">
-                <p className="font-bold">Users</p>
+                <p className="font-bold max-md:hidden">Users</p>
+                <Logo className="md:hidden py-0 mb-0!" />
                 {/* <BsThreeDotsVertical className="cursor-pointer hover:text-white dark:hover:text-violet-500" /> */}
             </div>
             <div className="p-2">

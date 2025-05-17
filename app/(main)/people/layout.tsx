@@ -1,6 +1,11 @@
 import getUsers from "@/app/actions/getUsers";
 import UserList from "./components/UserList";
 import getSession from "@/app/actions/getSession";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Chatzz | Peoples",
+};
 
 type Props = {
     children: React.ReactNode;
