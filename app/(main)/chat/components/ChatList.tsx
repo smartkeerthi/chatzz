@@ -10,6 +10,10 @@ import { useSession } from "next-auth/react"
 import { pusherClient } from "@/lib/pusherClient"
 import { find } from 'lodash'
 import Logo from "@/components/logo"
+import Image from "next/image"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 type Props = {
     initialItem: FullConversationType[]
@@ -29,6 +33,7 @@ const ChatList = ({ initialItem }: Props) => {
     const pusherKey = useMemo(() => {
         return session.data?.user?.email
     }, [session.data?.user?.email])
+
 
     useEffect(() => {
         // console.log(pusherKey);
@@ -92,7 +97,7 @@ const ChatList = ({ initialItem }: Props) => {
             <div className="p-2">
                 <Input value={search} onChange={handleChange} className="bg-white focus:outline-0 focus-visible:ring-0" placeholder="search..." />
             </div>
-            <ScrollArea className="flex-1 h-1 ">
+            {lists.length != 0 ? (<ScrollArea className="flex-1 h-1 ">
                 <ul className="px-1">
                     {
                         lists.map((item) => {
@@ -102,7 +107,16 @@ const ChatList = ({ initialItem }: Props) => {
                         })
                     }
                 </ul>
-            </ScrollArea>
+            </ScrollArea>) : (
+                <div className="flex-1">
+                    <div className="w-96 max-lg:w-80 max-sm:w-full flex flex-col items-center">
+                        <Image src={'/EmptyChat.svg'} alt="new chat" width={150} height={150} className="mb-3 mr-10 mt-5" loading="lazy" />
+                        <p className="font-bold text-[1.1rem] text-center leading-5 mb-2">It's pretty quite in here<br />don't you think?</p>
+                        <p className="text-gray-400 text-[10px] mb-2">Find friends to begin a conversation</p>
+                        <Link className="bg-violet-500 hover:bg-violet-600 cursor-pointer active:bg-violet-600 px-5 py-1.5 rounded-[7px] text-white" role="link" href={'/people'}>Add Friends</Link>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }

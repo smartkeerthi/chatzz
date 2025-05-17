@@ -4,12 +4,12 @@ import useOtherUser from "@/app/hooks/useOtherUser"
 import { FullConversationType } from "@/app/types"
 import Avatar from "@/components/Avatar"
 import { useRouter } from "next/navigation"
-import { Suspense, useCallback, useEffect, useMemo, useState } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 import moment from 'moment'
 import clsx from "clsx"
 import { IoCheckmarkOutline } from "react-icons/io5";
 import { IoCheckmarkDoneOutline } from "react-icons/io5";
-import { useSession } from "next-auth/react"
+import useActiveList from "@/app/hooks/useActiveList"
 
 type Props = {
     data: FullConversationType,
@@ -24,7 +24,10 @@ const ChatBox = ({ data: item, selected }: Props) => {
     const router = useRouter()
 
     const otherUser = useOtherUser(item)
-    const session = useSession()
+
+    const { members } = useActiveList();
+
+    const isActive = members.indexOf(otherUser?.email!) !== -1
 
     const handleClick = useCallback(() => {
         router.push(`/chat/${item.id}`);
@@ -77,9 +80,12 @@ const ChatBox = ({ data: item, selected }: Props) => {
 
     return (
         <>
-            <li className={clsx(`w-96 max-lg:w-80 max-sm:w-full flex items-center justify-between px-2 rounded-[5px] my-1 py-2 gap-1.5 hover:bg-gray-300 dark:hover:bg-white/20 cursor-pointer`, selected && "bg-violet-500/50 hover:bg-violet-500/50")} onClick={handleClick}>
+            <li className={clsx(`w-96 max-lg:w-80 max-sm:w-full flex items-center justify-between px-2 rounded-[5px] my-1 py-2 gap-1.5 hover:bg-gray-300 dark:hover:bg-white/20 active:bg-gray-300 dark:active:bg-white/20 cursor-pointer`, selected && "bg-violet-500/50 hover:bg-violet-500/50")} onClick={handleClick}>
                 <div className="flex gap-2 items-center w-full">
-                    <Avatar image={otherUser.image as string} username={otherUser.username} />
+                    <div className="relative">
+                        <Avatar image={otherUser.image as string} username={otherUser.username} />
+                        {isActive && <span className="w-1.5 h-1.5 rounded-full bg-green-400 absolute top-0 right-1 scale-110 brightness-150" />}
+                    </div>
                     <div className="flex flex-col leading-none gap-1 w-72 max-sm:w-full">
                         <div className="flex items-center justify-between">
                             <p className="font-bold p-0 m-0 border-0 w-56  truncate text-[0.8rem] tracking-wide capitalize">{otherUser.username}</p>

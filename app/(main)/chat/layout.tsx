@@ -1,6 +1,10 @@
 import getConversations from "@/app/actions/getConversations";
 import ChatList from "./components/ChatList";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+    title: "Chatzz | Chats",
+};
 
 type Props = {
     children: React.ReactNode;

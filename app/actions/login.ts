@@ -15,9 +15,10 @@ export const login = async (values: z.infer<typeof signInSchema>) => {
     }
 
     const { email, password } = validate
+    const emailCase = email.toLowerCase()
     const userExists = await prisma.user.findUnique({
         where: {
-            email
+            email: emailCase
         }
     })
 
@@ -27,7 +28,7 @@ export const login = async (values: z.infer<typeof signInSchema>) => {
 
     try {
         await signIn('credentials', {
-            email,
+            email: userExists.email,
             password,
             redirectTo: '/'
         })

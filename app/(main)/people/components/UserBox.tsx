@@ -57,7 +57,7 @@ function UserBox({ data: item }: Props) {
 
     return (
         <>
-            <li className="w-96 max-sm:w-full flex items-center justify-between px-2 rounded-[5px] my-1 py-2 gap-1.5 hover:bg-gray-300 dark:hover:bg-white/20">
+            <li className="w-96 max-sm:w-full flex items-center justify-between px-2 rounded-[5px] my-1 py-2 gap-1.5 hover:bg-gray-300 dark:hover:bg-white/20 active:bg-gray-300 dark:active:bg-white/20">
                 <div className="flex gap-2 items-center w-full">
                     <Avatar image={item.image} username={item.username} />
                     <div className="flex flex-col leading-none w-64 max-sm:w-full">
@@ -66,9 +66,9 @@ function UserBox({ data: item }: Props) {
                     </div>
                 </div>
                 {item.request == 'Requested' && <p className="text-[0.8rem] text-gray-500 font-medium pr-2">Requested</p>}
-                {item.request == 'Approve' && <Button className="bg-green-500 hover:bg-green-600 transition cursor-pointer px-2 text-[0.8rem] w-16" variant={'default'} onClick={handleApprove} disabled={accepting}>{!accepting ? (<>{new Array(3).forEach(() => <span className="w-3 h-3 bg-white absolute" />)}</>) : ('Accept')}</Button>}
-                {item.request == 'Follow' && <Button className="bg-blue-500 hover:bg-blue-600 transition cursor-pointer px-2 text-[0.8rem] w-16" variant={'default'} onClick={handleSubmit} disabled={following}>Follow</Button>}
-                {item.request == 'Message' && <Link href={`/chat/${item.conversationId}`} className="cursor-pointer px-2  hover:underline dark:hover:text-violet-500 text-[0.8rem] tracking-wide font-medium">Message</Link>}
+                {item.request == 'Approve' && <Button className="bg-green-500 hover:bg-green-600 active:bg-green-600 transition cursor-pointer px-2 text-[0.8rem] w-16" variant={'default'} onClick={handleApprove} disabled={accepting}>Accept</Button>}
+                {item.request == 'Follow' && <Button className="bg-blue-500 hover:bg-blue-600 active:bg-blue-600 transition cursor-pointer px-2 text-[0.8rem] w-16" variant={'default'} onClick={handleSubmit} disabled={following}>Follow</Button>}
+                {item.request == 'Message' && <Link href={`/chat/${item.conversationId}`} className="cursor-pointer px-2  hover:underline dark:hover:text-violet-500 active:underline dark:active:text-violet-500 text-[0.8rem] tracking-wide font-medium">Message</Link>}
             </li>
         </>
     )

@@ -45,7 +45,7 @@ const Footer = ({ conversationId }: { conversationId: string }) => {
 
 
     return (
-        <div className="absolute w-full bottom-0 left-0 py-2 px-3 border-t-2 drop-shadow-xl flex gap-2 bg-[#f9f9f9] dark:bg-background">
+        <div className="absolute w-full bottom-0 border-4 border-x-[#f9f9f9] border-b-[#f9f9f9]  rounded-br-2xl max-sm:rounded-none  left-0 py-1 px-3 border-t-2 drop-shadow-xl flex gap-2 bg-[#f9f9f9] dark:bg-background max-sm:sticky max-sm:bottom-0 max-md:bottom-13">
             <Dialog modal open={modalOpen}>
                 <DialogTrigger asChild>
                     <Button variant={"outline"} className="cursor-pointer" disabled={loading} onClick={() => setModalOpen(true)}><BiImageAdd /></Button>
