@@ -3,8 +3,6 @@
 import useActiveChannel from "@/app/hooks/useActiveChannel";
 
 
-type Props = {};
-
 function ActiveStatus() {
     useActiveChannel();
     return null;
