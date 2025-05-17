@@ -5,7 +5,7 @@ import useActiveChannel from "@/app/hooks/useActiveChannel";
 
 type Props = {};
 
-function ActiveStatus(props: Props) {
+function ActiveStatus() {
     useActiveChannel();
     return null;
 }
