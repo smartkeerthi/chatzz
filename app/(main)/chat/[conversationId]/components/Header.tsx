@@ -11,6 +11,8 @@ import { MdClose } from "react-icons/md";
 import { useMemo } from "react"
 import { IoMdArrowBack } from "react-icons/io";
 import { useRouter } from "next/navigation"
+import useActiveList from "@/app/hooks/useActiveList"
+import clsx from "clsx"
 
 
 type Props = {
@@ -25,8 +27,10 @@ const Header = ({ conversation }: Props) => {
 
     const router = useRouter()
 
-    const isActive = true
 
+    const { members } = useActiveList();
+
+    const isActive = members.indexOf(otherUser?.email!) !== -1
     const statusText = useMemo(() => {
         if (conversation.isGroup) {
             return `${conversation.users.length} members`;
@@ -56,7 +60,7 @@ const Header = ({ conversation }: Props) => {
                         <Avatar image={otherUser.image!} username={otherUser.username} />
                         <div className="flex flex-col justify-center">
                             <p className="leading-5">{otherUser.username}</p>
-                            <span className="text-[0.6rem] text-blue-500 font-semibold tracking-wider">Online</span>
+                            <span className={clsx(`text-[0.6rem] text-blue-500 font-semibold tracking-wider`, !isActive && 'text-gray-500')}>{statusText}</span>
                         </div>
                     </>
                 )}

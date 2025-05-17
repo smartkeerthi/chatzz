@@ -4,6 +4,7 @@ import "./globals.css";
 import ToasterContext from "@/context/ToaterContext";
 import { AuthContext } from "@/context/AuthContext";
 import { ThemeProvider } from "@/context/ThemeProvider";
+import ActiveStatus from "@/components/ActiveStatus";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased h-[100vh] bg-violet-500 w-[100vw]`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased h-[100vh] bg-violet-500 w-[100vw] max-sm:h-[100dvh]`}
       >
         <ThemeProvider
           attribute="class"
@@ -38,6 +39,7 @@ export default function RootLayout({
         >
           <AuthContext>
             <ToasterContext />
+            <ActiveStatus />
             {children}
           </AuthContext>
         </ThemeProvider>
