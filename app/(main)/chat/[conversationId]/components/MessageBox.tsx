@@ -6,8 +6,9 @@ import clsx from "clsx"
 import { useSession } from "next-auth/react"
 import Image from "next/image"
 import ViewImageModal from "./ViewImageModal"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import moment from 'moment'
+import { IoIosArrowDown } from "react-icons/io"
 
 type MessageProps = {
     isLast: boolean,
@@ -40,7 +41,7 @@ function MessageBox({ isLast, data }: MessageProps) {
 
 
     return (
-        <div className={clsx('flex gap-1 mb-2 items-start px-2', isOwn && 'justify-end')}>
+        <div className={clsx('flex gap-1 mb-2 items-start px-2 relative', isOwn && 'justify-end')}>
             <Avatar className={clsx('size-7', isOwn && 'order-2')}>
                 <AvatarImage src={data.sender.image!} />
                 <AvatarFallback className={clsx("text-white text-xs", isOwn ? ('bg-violet-500') : ('bg-gray-500'))}>
@@ -52,7 +53,10 @@ function MessageBox({ isLast, data }: MessageProps) {
             </Avatar>
             <ViewImageModal imgOpen={imgOpen} closeImg={() => setImgOpen(false)} images={slides} />
             <div>
-                <div className={clsx("px-2 py-1 rounded-[0.4rem] text-sm transition-all duration-300 max-w-96", isOwn ? ('bg-violet-500/50') : ('bg-gray-500/50'), data.image.length > 0 && 'cursor-pointer hover:contrast-150')}>
+                <div className={clsx("px-2 py-1 rounded-[0.4rem] text-sm transition-all duration-300 max-w-96 flex items-start justify-between", isOwn ? ('bg-violet-500/50') : ('bg-gray-500/50'), data.image.length > 0 && 'cursor-pointer hover:contrast-150')}>
+                    {/* <span className={clsx("pl-1", isOwn && ('order-2'))}>
+                        <IoIosArrowDown />
+                    </span> */}
                     {data.image.length > 0 ? (
                         <div className="grid grid-cols-2 gap-1 auto-rows-auto" onClick={() => setImgOpen(true)}>
                             {data.image.slice(0, viewImageCount).map((img, i) => (
@@ -67,6 +71,7 @@ function MessageBox({ isLast, data }: MessageProps) {
                     ) : (
                         <p>{data.body}</p>
                     )}
+
                 </div>
                 <div className={clsx("flex", isOwn && 'justify-end')}>
                     <span className={clsx("text-[0.6rem]")}>{moment(data.createdAt).format('DD/MM LT')}</span>

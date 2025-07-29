@@ -55,7 +55,7 @@ function ViewImageModal({ imgOpen, closeImg, images }: Props) {
             close={closeImg}
             slides={images}
             plugins={[Thumbnails, Dowload, Zoom, Share]}
-            thumbnails={{ width: 80, height: 80, vignette: true, borderColor: '#555' }}
+            thumbnails={{ width: 80, height: 80, vignette: true, borderColor: '#555', showToggle: true }}
         />
     )
 }

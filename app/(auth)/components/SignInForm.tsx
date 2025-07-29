@@ -76,9 +76,9 @@ export function SignInForm() {
                                 <Input placeholder="********" type="password"  {...field} disabled={loading} />
                             </FormControl>
                             <FormMessage />
-                            <div className="w-full flex justify-start mt-1">
+                            {/* <div className="w-full flex justify-start mt-1">
                                 <Link href="/resetPassword" className="text-blue-500 hover:underline text-[0.8em]">Forget password?</Link>
-                            </div>
+                            </div> */}
                         </FormItem>
                     )}
                 />

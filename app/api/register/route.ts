@@ -3,6 +3,8 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs"
 import { sendVerifyEmail } from "@/app/actions/sendVerifyEmail";
 
+const EmailService = process.env.EMAIL_SERVICE!
+
 export async function POST(request: Request) {
     try {
         const body = await request.json();
@@ -33,23 +35,31 @@ export async function POST(request: Request) {
 
         const hashedPassword = await bcrypt.hash(password, 12)
 
+        const isEmailEnable = EmailService == "Enabled" ? true : false
+
+        const isVerified = isEmailEnable ? 'N' : 'y'
+
         const user = await prisma.user.create({
             data: {
                 username,
                 email,
                 password: hashedPassword,
-                isVerified: 'N',
+                isVerified: isVerified,
                 isProfileCompleted: 'N'
             }
         })
 
-        const verifyEmailSent = sendVerifyEmail(user.id, user.email)
+        if (isEmailEnable) {
+            const verifyEmailSent = sendVerifyEmail(user.id, user.email)
 
-        if (!verifyEmailSent) {
-            return NextResponse.json({ error: "Something went wrong! unable to sent verify email" })
+            if (!verifyEmailSent) {
+                return NextResponse.json({ error: "Something went wrong! unable to sent verify email" })
+            }
+            return NextResponse.json({ success: "Email sent for verification" }, { status: 201 })
         }
 
-        return NextResponse.json({ success: "Email sent for verification" }, { status: 201 })
+        return NextResponse.json({ success: "Registered successfully" }, { status: 201 })
+
 
     } catch (error: any) {
         return NextResponse.json({ error: 'Internal Error' }, { status: 500 })
