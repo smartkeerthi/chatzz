@@ -39,11 +39,13 @@ function SideBar({ userName, image, email }: Props) {
                             />
                         ))}
                     </ul>
-                    <div className="w-full pb-3 flex flex-col items-center">
+                    <div className="w-full pb-3 flex flex-col items-center relative">
                         <Separator className="my-1 bg-zinc-100/40" />
                         <Tooltip>
-                            <TooltipTrigger>
-                                <ToggleTheme />
+                            <TooltipTrigger asChild>
+                                <div>
+                                    <ToggleTheme />
+                                </div>
                             </TooltipTrigger>
                             <TooltipContent side="right">
                                 <p>Toggle theme</p>
